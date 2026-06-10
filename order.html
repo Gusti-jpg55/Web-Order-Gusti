@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Order VulTax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+}
+
+nav {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+a {color:white;text-decoration:none;}
+
+.box {
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+}
+
+select, input {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:none;
+}
+
+button {
+  width:100%;
+  background:#22c55e;
+  border:none;
+  padding:15px;
+  color:white;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.total {
+  margin-top:10px;
+  color:#22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>⚡ VulTax</h2>
+<div>
+<a href="index.html">Home</a>
+</div>
+</nav>
+
+<div class="box">
+
+<h2>🔥 Order Unchek VulTax</h2>
+
+<select id="paket">
+  <option value="5000">Paket 1 - Rp 5.000</option>
+  <option value="10000">Paket 2 - Rp 10.000</option>
+  <option value="20000">Paket 3 - Rp 20.000</option>
+  <option value="50000">Paket 4 - Rp 50.000</option>
+  <option value="100000">Paket 5 - Rp 100.000</option>
+</select>
+
+<input type="number" id="jumlah" value="1">
+
+<div class="total">
+Total: Rp <span id="total">5000</span>
+</div>
+
+</div>
+
+<h2>Checkout</h2>
+
+<input type="text" id="nama" placeholder="Nama">
+
+<p>DANA: 08132846492</p>
+<p>GoPay: 08132846492</p>
+
+<button onclick="checkout()">Checkout WA</button>
+
+<script>
+let paket = document.getElementById("paket");
+let jumlah = document.getElementById("jumlah");
+let totalText = document.getElementById("total");
+
+function hitung(){
+  let harga = parseInt(paket.value);
+  let qty = parseInt(jumlah.value) || 1;
+  totalText.innerText = harga * qty;
+}
+
+paket.onchange = hitung;
+jumlah.oninput = hitung;
+
+function checkout(){
+  let nama = document.getElementById("nama").value;
+  let harga = paket.value;
+  let qty = jumlah.value;
+  let total = harga * qty;
+
+  if(nama == ""){
+    alert("Isi nama!");
+    return;
+  }
+
+  let pesan = `Halo admin, saya ${nama}%0A`;
+  pesan += `Order Unchek VulTax%0A`;
+  pesan += `Harga: Rp ${harga}%0A`;
+  pesan += `Jumlah: ${qty}%0A`;
+  pesan += `Total: Rp ${total}`;
+
+  let no = "6281958988748";
+
+  window.open(`https://wa.me/${no}?text=${pesan}`);
+}
+</script>
+
+</body>
+</html>
